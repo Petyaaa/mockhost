@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events Site</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav class="site-nav">
+      <span class="brand">Event Galaxy</span>
+      <div class="nav-links">
+        <a href="#events">Events</a>
+        <a href="#rsvp">RSVP</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#footer">Contact</a>
+      </div>
+        <button class="sign-up-button" id="signUpButton" type="button">Sign Up</button>
+      <button class="calendar-access" id="calendarAccessBtn" type="button">Access Calendar</button>
+        <button class="create-event-button" id="createEventBtn" type="button" style="display:none">Create Event</button>
+      <div class="user-menu" id="userMenu">
+        <button class="sign-in-button" id="signInButton" type="button">Sign In</button>
+        <div class="menu-dropdown" id="userDropdown">
+          <button id="signOutButton" type="button">Sign Out</button>
+        </div>
+      </div>
+    </nav>
+    <div class="hero-image">
+      <img src="eventgalaxcy.png" alt="Event Galaxy hero image">
+    </div>
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+    <h1>Featured Events</h1>
+    <p>Discover upcoming gatherings, workshops, and community experiences. Save your spot and stay connected with events near you.</p>
+  </header>
+  <main class="container">
+    <section id="events" class="events-grid">
+      <article class="event-card">
+        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80" alt="Networking event">
+        <div class="event-content">
+          <h2>Startup Networking Night</h2>
+          <p>Meet founders, investors, and mentors in an evening of collaboration, new ideas, and fast-paced connections.</p>
+          <div class="event-meta">
+            <span>June 28 • 6:00 PM</span>
+            <span>Downtown Loft</span>
+          </div>
+        </div>
+      </article>
+      <article class="event-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Workshop session">
+        <div class="event-content">
+          <h2>Design Thinking Workshop</h2>
+          <p>Hands-on workshop to refine your product strategy with practical exercises and expert guidance.</p>
+          <div class="event-meta">
+            <span>July 3 • 10:00 AM</span>
+            <span>Studio 14</span>
+          </div>
+        </div>
+      </article>
+      <article class="event-card">
+        <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=900&q=80" alt="Conference session">
+        <div class="event-content">
+          <h2>Creative Summit 2026</h2>
+          <p>Join industry leaders for inspiring talks, practical sessions, and networking with creative professionals.</p>
+          <div class="event-meta">
+            <span>July 16 • 9:00 AM</span>
+            <span>Conference Center</span>
+          </div>
+        </div>
+      </article>
+    </section>
+    <section class="rsvp-panel">
+      <h3>Reserve Your Spot</h3>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <button type="submit">Join the Waitlist</button>
+      </form>
+    </section>
+    <section id="calendar" class="calendar-panel" aria-hidden="true">
+      <h3>Galactic Events Calendar</h3>
+      <p>Signed-in users may access this calendar to see upcoming space-themed meetups and sessions.</p>
+      <ul class="calendar-list">
+        <li class="calendar-item">
+          <strong>Launch Party: Starship Innovation</strong>
+          <span>July 1 • 7:00 PM — Orbit Hall</span>
+        </li>
+        <li class="calendar-item">
+          <strong>Cosmic Networking Session</strong>
+          <span>July 4 • 5:00 PM — Nebula Lounge</span>
+        </li>
+        <li class="calendar-item">
+          <strong>Interstellar Design Workshop</strong>
+          <span>July 10 • 11:00 AM — Command Deck</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+  <footer id="footer">
+    &copy; 2026 Event Galaxy. Stay tuned for the latest updates.
+  </footer>
+  <div class="modal-overlay" id="signInModal">
+    <div class="sign-in-modal">
+      <button class="modal-close" id="modalClose" type="button">×</button>
+      <div class="auth-tabs">
+        <button id="showSignInTab" class="active" type="button">Sign In</button>
+        <button id="showSignUpTab" type="button">Sign Up</button>
+      </div>
+      <h2 id="authModalTitle">Sign In</h2>
+      <p id="authModalText">Enter your email and password to access RSVP and calendar features.</p>
+      <form id="signInForm">
+        <input type="email" id="signinEmail" placeholder="Email address" required>
+        <input type="password" id="signinPassword" placeholder="Password" required>
+        <div id="roleRow" style="display:none">
+          <label for="roleSelect">Role</label>
+          <select id="roleSelect">
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+          </select>
+        </div>
+        <div class="captcha-section">
+          <label class="captcha-question-label">Captcha</label>
+          <div class="captcha-row">
+            <span class="captcha-label" id="captchaQuestion">What is 3 + 4?</span>
+            <button id="refreshCaptchaBtn" type="button" class="refresh-captcha-btn" title="Refresh captcha">↻</button>
+          </div>
+          <input type="text" id="captchaInput" class="captcha-input" placeholder="Your answer" required>
+        </div>
+        <button type="submit">Send verification code</button>
+      </form>
+      <div id="verificationStep" class="verification-step" aria-hidden="true">
+        <p id="verificationMessage">A verification code has been sent to your email. Enter it below to finish signing in.</p>
+        <input type="text" id="verificationCodeInput" placeholder="Verification code">
+        <button id="verifyCodeButton" type="button">Verify code</button>
+      </div>
+    </div>
+  </div>
+  <!-- Event details modal -->
+  <div class="modal-overlay" id="eventDetailModal">
+    <div class="sign-in-modal">
+      <button class="modal-close" id="detailClose" type="button">×</button>
+      <h2 id="detailTitle">Event</h2>
+      <p id="detailDescription"></p>
+      <p id="detailMeta"></p>
+    </div>
+  </div>
+
+  <!-- Create event modal -->
+  <div class="modal-overlay" id="createEventModal">
+    <div class="sign-in-modal">
+      <button class="modal-close" id="createClose" type="button">×</button>
+      <h2>Create Event</h2>
+      <form id="createEventForm">
+        <input type="text" id="eventTitle" placeholder="Event title" required>
+        <textarea id="eventDescription" placeholder="Description" required></textarea>
+        <input type="text" id="eventDate" placeholder="Date / Time">
+        <input type="text" id="eventLocation" placeholder="Location">
+        <input type="text" id="eventImage" placeholder="Image URL">
+        <button type="submit">Create Event</button>
+      </form>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
