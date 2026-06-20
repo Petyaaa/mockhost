@@ -259,8 +259,12 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', captchasActive: captchas.size });
 });
 
-app.listen(PORT, () => {
-  console.log(`✓ Event Galaxy backend running at http://localhost:${PORT}`);
-  console.log(`✓ Frontend: http://localhost:${PORT}`);
-  console.log(`✓ Captcha endpoint: http://localhost:${PORT}/api/captcha`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`✓ Event Galaxy backend running at http://localhost:${PORT}`);
+    console.log(`✓ Frontend: http://localhost:${PORT}`);
+    console.log(`✓ Captcha endpoint: http://localhost:${PORT}/api/captcha`);
+  });
+}
+
+module.exports = app;

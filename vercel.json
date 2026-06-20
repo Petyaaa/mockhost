@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "sites/server.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "sites/server.js" }
+  ],
+  "installCommand": "cd sites && npm install"
+}
